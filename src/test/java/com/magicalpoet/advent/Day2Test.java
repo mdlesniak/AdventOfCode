@@ -1,6 +1,5 @@
 package com.magicalpoet.advent;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Day2Test {
+    private final Utils utils = new Utils();
     private Day2Dive1 partOne;
     private Day2Dive2 partTwo;
 
@@ -48,7 +48,7 @@ class Day2Test {
 
     @Test
     void partOneAnswer() throws Exception {
-        List<String> input = IOUtils.readLines(this.getClass().getClassLoader().getResourceAsStream("day2Input.txt"), "utf-8");
+        List<String> input = utils.readFileToList("day2Input.txt");
         int answer = partOne.findSubPosition(input);
         assertThat(answer).isGreaterThan(1);
         System.out.println(answer);
@@ -56,7 +56,7 @@ class Day2Test {
 
     @Test
     void parTwoAnswer() throws Exception {
-        List<String> input = IOUtils.readLines(this.getClass().getClassLoader().getResourceAsStream("day2Input.txt"), "utf-8");
+        List<String> input = utils.readFileToList("day2Input.txt");
         int answer = partTwo.findSubPosition(input);
         assertThat(answer).isGreaterThan(1);
         System.out.println(answer);
