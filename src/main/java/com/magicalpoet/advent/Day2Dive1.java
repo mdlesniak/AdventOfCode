@@ -2,7 +2,7 @@ package com.magicalpoet.advent;
 
 import java.util.List;
 
-public class Day2PartOne {
+public class Day2Dive1 {
     private int depth = 0;
     private int horizontal = 0;
 

@@ -9,13 +9,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Day2Test {
-    private Day2PartOne partOne;
-    private Day2PartTwo partTwo;
+    private Day2Dive1 partOne;
+    private Day2Dive2 partTwo;
 
     @BeforeEach
     void setUp() {
-        partOne = new Day2PartOne();
-        partTwo = new Day2PartTwo();
+        partOne = new Day2Dive1();
+        partTwo = new Day2Dive2();
     }
 
     @Test
