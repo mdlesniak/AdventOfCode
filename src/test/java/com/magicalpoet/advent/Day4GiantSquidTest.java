@@ -22,6 +22,24 @@ class Day4GiantSquidTest {
     }
 
     @Test
+    void createBoard() {
+        String data = "22 13 17 11 0\n" +
+                "8 2 23 4 24\n" +
+                "21 9 14 16 7\n" +
+                "6 10 3 18 5\n" +
+                "1 12 20 15 19";
+        BingoBoard board = giantSquid.createBoard(data);
+
+        assertThat(board.getB1().getValue()).isEqualTo(22);
+        assertThat(board.getI2().getValue()).isEqualTo(2);
+        assertThat(board.getN3().getValue()).isEqualTo(14);
+        assertThat(board.getG4().getValue()).isEqualTo(18);
+        assertThat(board.getO5().getValue()).isEqualTo(19);
+
+        board.getMyNumbers().forEach(number -> assertThat(number.getMarked()).isFalse());
+    }
+
+    @Test
     void getBoards() throws Exception {
         String boardsData = utils.readFileToString(TEST_BOARDS);
         List<BingoBoard> boards = giantSquid.getBoards(boardsData);
@@ -30,14 +48,66 @@ class Day4GiantSquidTest {
 
     @Test
     void bingoBoard_canMarkNumber() {
-        BingoBoard bingoBoard = new BingoBoard();
-
+        String data = "22 13 17 11 0\n" +
+                "8 2 23 4 24\n" +
+                "21 9 14 16 7\n" +
+                "6 10 3 18 5\n" +
+                "1 12 20 15 19";
+        BingoBoard board = giantSquid.createBoard(data);
+        boolean bingo = board.markNumberAndAnnounceIfBingo(23);
+        assertThat(board.getN2().getMarked()).isTrue();
+        assertThat(bingo).isFalse();
     }
 
     @Test
-    void testInput() {
-        List<BingoBoard> boards = new ArrayList<>();
-        int result = giantSquid.playBingo(TEST_NUMBERS, boards);
+    void bingoBoard_announcesBingoOnRow() {
+        String data = "22 13 17 11 0\n" +
+                "8 2 23 4 24\n" +
+                "21 9 14 16 7\n" +
+                "6 10 3 18 5\n" +
+                "1 12 20 15 19";
+        BingoBoard board = giantSquid.createBoard(data);
+        board.getB1().setMarked(true);
+        board.getI1().setMarked(true);
+        board.getN1().setMarked(true);
+        board.getG1().setMarked(true);
+
+        Boolean bingo = board.markNumberAndAnnounceIfBingo(0);
+
+        assertThat(bingo).isTrue();
+    }
+
+    @Test
+    void bingoBoard_announcesBingoOnColumn() {
+        String data = "22 13 17 11 0\n" +
+                "8 2 23 4 24\n" +
+                "21 9 14 16 7\n" +
+                "6 10 3 18 5\n" +
+                "1 12 20 15 19";
+        BingoBoard board = giantSquid.createBoard(data);
+        board.getB1().setMarked(true);
+        board.getB2().setMarked(true);
+        board.getB3().setMarked(true);
+        board.getB4().setMarked(true);
+
+        Boolean bingo = board.markNumberAndAnnounceIfBingo(1);
+
+        assertThat(bingo).isTrue();
+    }
+
+
+
+    @Test
+    void testInput() throws Exception {
+        String boardsData = utils.readFileToString(TEST_BOARDS);
+        int result = giantSquid.playBingo(TEST_NUMBERS, boardsData);
         assertThat(result).isEqualTo(4512);
+    }
+
+    @Test
+    void partOneAnswer() throws Exception {
+        String boardsData = utils.readFileToString(REAL_BOARDS);
+        int result = giantSquid.playBingo(REAL_NUMBERS, boardsData);
+        assertThat(result).isEqualTo(38913);
     }
 }

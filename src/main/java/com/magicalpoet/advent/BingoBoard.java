@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -35,23 +36,42 @@ public class BingoBoard {
     private BingoNumber o3;
     private BingoNumber o4;
     private BingoNumber o5;
-    private List<BingoNumber> myNumbers;
-
-    public BingoBoard() {
-        myNumbers = List.of(b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, n1, n2, n3, n4, n5, g1, g2, g3, g4, g5, o1, o2, o3, o4, o5);
-    }
+    private List<BingoNumber> myNumbers = new ArrayList<>();
 
     public boolean markNumberAndAnnounceIfBingo(Integer number) {
-//        myNumbers.forEach(myNumber -> {
-//            if (myNumber.getValue().equals(number)) {
-//                myNumber.setMarked(true);
-//            }
-//        });
+        if (myNumbers.isEmpty()) {
+            myNumbers = List.of(b1, b2, b3, b4, b5, i1, i2, i3, i4, i5, n1, n2, n3, n4, n5, g1, g2, g3, g4, g5, o1, o2, o3, o4, o5);
+        }
+        myNumbers.forEach(myNumber -> {
+            if (myNumber.getValue().equals(number)) {
+                myNumber.setMarked(true);
+            }
+        });
         return checkForBingo();
     }
 
     private boolean checkForBingo() {
-        return false;
+        return (bingoOnRow() || bingoOnColumn());
+    }
+
+    private boolean bingoOnRow() {
+        return allMarked(b1, i1, n1, g1, o1) ||
+                allMarked(b2, i2, n2, g2, o2) ||
+                allMarked(b3, i3, n3, g3, o3) ||
+                allMarked(b4, i4, n4, g4, o4) ||
+                allMarked(b5, i5, n5, g5, o5);
+    }
+
+    private boolean bingoOnColumn() {
+        return allMarked(b1, b2, b3, b4, b5) ||
+                allMarked(i1, i2, i3, i4, i5) ||
+                allMarked(n1, n2, n3, n4, n5) ||
+                allMarked(g1, g2, g3, g4, g5) ||
+                allMarked(o1, o2, o3, o4, o5);
+    }
+
+    private boolean allMarked(BingoNumber first, BingoNumber second, BingoNumber third, BingoNumber fourth, BingoNumber fifth) {
+        return first.getMarked() && second.getMarked() && third.getMarked() && fourth.getMarked() && fifth.getMarked();
     }
 
     public void populateFirstRow(String[] numbers) {
