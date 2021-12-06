@@ -3,7 +3,6 @@ package com.magicalpoet.advent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -95,19 +94,31 @@ class Day4GiantSquidTest {
         assertThat(bingo).isTrue();
     }
 
-
-
     @Test
-    void testInput() throws Exception {
+    void testInput_partOne() throws Exception {
         String boardsData = utils.readFileToString(TEST_BOARDS);
-        int result = giantSquid.playBingo(TEST_NUMBERS, boardsData);
+        int result = giantSquid.findFirstWinningScore(TEST_NUMBERS, boardsData);
         assertThat(result).isEqualTo(4512);
     }
 
     @Test
     void partOneAnswer() throws Exception {
         String boardsData = utils.readFileToString(REAL_BOARDS);
-        int result = giantSquid.playBingo(REAL_NUMBERS, boardsData);
+        int result = giantSquid.findFirstWinningScore(REAL_NUMBERS, boardsData);
         assertThat(result).isEqualTo(38913);
+    }
+
+    @Test
+    void testInput_partTwo() throws Exception {
+        String boardsData = utils.readFileToString(TEST_BOARDS);
+        int result = giantSquid.findLastWinningScore(TEST_NUMBERS, boardsData);
+        assertThat(result).isEqualTo(1924);
+    }
+
+    @Test
+    void partTwoAnswer() throws Exception {
+        String boardsData = utils.readFileToString(REAL_BOARDS);
+        int result = giantSquid.findLastWinningScore(REAL_NUMBERS, boardsData);
+        assertThat(result).isEqualTo(16836);
     }
 }

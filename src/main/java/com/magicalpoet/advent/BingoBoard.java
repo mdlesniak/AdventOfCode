@@ -37,6 +37,7 @@ public class BingoBoard {
     private BingoNumber o4;
     private BingoNumber o5;
     private List<BingoNumber> myNumbers = new ArrayList<>();
+    private boolean isWinner = false;
 
     public boolean markNumberAndAnnounceIfBingo(Integer number) {
         if (myNumbers.isEmpty()) {
@@ -47,11 +48,12 @@ public class BingoBoard {
                 myNumber.setMarked(true);
             }
         });
-        return checkForBingo();
+        checkForBingo();
+        return isWinner;
     }
 
-    private boolean checkForBingo() {
-        return (bingoOnRow() || bingoOnColumn());
+    private void checkForBingo() {
+        isWinner = (bingoOnRow() || bingoOnColumn());
     }
 
     private boolean bingoOnRow() {

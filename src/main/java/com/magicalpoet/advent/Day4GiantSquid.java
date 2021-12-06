@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Day4GiantSquid {
-    public int playBingo(String numbersData, String boardsData) throws Exception {
+    public int findFirstWinningScore(String numbersData, String boardsData) throws Exception {
         List<BingoBoard> boards = getBoards(boardsData);
         List<Integer> numbers = Arrays.stream(numbersData.split(",")).map(Integer::parseInt).collect(Collectors.toList());
         int winningScore = 0;
@@ -13,7 +13,7 @@ public class Day4GiantSquid {
             for (BingoBoard board : boards) {
                 boolean isWinner = board.markNumberAndAnnounceIfBingo(number);
                 if (isWinner) {
-                    winningScore = number.intValue() * totalUnmarkedNumbers(board);
+                    winningScore = number * totalUnmarkedNumbers(board);
                     break;
                 }
             }
@@ -22,6 +22,26 @@ public class Day4GiantSquid {
             }
         }
         return winningScore;
+    }
+
+    public int findLastWinningScore(String numbersData, String boardsData) throws Exception {
+        List<BingoBoard> boards = getBoards(boardsData);
+        List<Integer> numbers = Arrays.stream(numbersData.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        int score = 0;
+        for (Integer number : numbers) {
+            List<BingoBoard> nonWinners = boards.stream().filter(board -> !board.isWinner()).collect(Collectors.toList());
+            for (BingoBoard board : nonWinners) {
+                boolean isWinner = board.markNumberAndAnnounceIfBingo(number);
+                if (isWinner) {
+                    boards.remove(board);
+                    score = number * totalUnmarkedNumbers(board);
+                }
+            }
+            if (boards.isEmpty()) {
+                break;
+            }
+        }
+        return score;
     }
 
     public int totalUnmarkedNumbers(BingoBoard bingoBoard) {
