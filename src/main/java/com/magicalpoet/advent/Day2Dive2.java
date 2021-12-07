@@ -2,6 +2,7 @@ package com.magicalpoet.advent;
 
 import java.util.List;
 
+// TODO: combine the two Day2 classes
 public class Day2Dive2 {
     private int depth = 0;
     private int horizontal = 0;
