@@ -32,7 +32,7 @@ public class Day9LavaTubes {
 
     public List<Integer> findLowPoints(Map<Integer, List<Integer>> cave) {
         List<Integer> lowPoints = new ArrayList<>();
-        // TODO: stream and collect?
+        // TODO: map and stream/collect?
         cave.forEach((yPosition, value) -> {
             ListIterator<Integer> iterator = value.listIterator();
             while (iterator.hasNext()) {
