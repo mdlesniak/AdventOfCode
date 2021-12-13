@@ -8,7 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Day2DiveTest {
-    private final Utils utils = new Utils();
+    private final TestUtils utils = new TestUtils();
     private Day2Dive1 partOne;
     private Day2Dive2 partTwo;
 

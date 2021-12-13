@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class Day7WhalesTest {
     private static String TEST_INPUT;
     private static String REAL_INPUT;
-    private static final Utils utils = new Utils();
+    private static final TestUtils utils = new TestUtils();
     private Day7Whales whales;
 
     @BeforeAll

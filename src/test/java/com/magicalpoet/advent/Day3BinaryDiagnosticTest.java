@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class Day3BinaryDiagnosticTest {
     private static final String TEST_INPUT_FILE = "day3TestInput.txt";
     private static final String INPUT_FILE = "day3Input.txt";
-    private final Utils utils = new Utils();
+    private final TestUtils utils = new TestUtils();
     private Day3BinaryDiagnostic binaryDiagnostic;
 
     @BeforeEach

@@ -13,7 +13,7 @@ class Day9LavaTubesTest {
 
     private static final String TEST_INPUT_FILE = "day9TestInput.txt";
     private static final String INPUT_FILE = "day9Input.txt";
-    private final Utils utils = new Utils();
+    private final TestUtils utils = new TestUtils();
     private Day9LavaTubes lavaTubes;
 
     @BeforeEach
