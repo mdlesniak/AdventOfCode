@@ -38,8 +38,7 @@ public class Day13Origami {
 
     private Map<String, Coordinate> plotPoints(String[] points) {
         Map<String, Coordinate> grid = new HashMap<>();
-        for (int i = 0, pointsLength = points.length; i < pointsLength; i++) {
-            String point = points[i];
+        for (String point : points) {
             final String[] numbers = point.split(",");
             final Coordinate coordinate = new Coordinate(Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1]));
             grid.put(point, coordinate);
