@@ -34,12 +34,12 @@ class Day14PolymerizationTest {
         assertThat(result).contains(entry("N", 2), entry("B", 6), entry("C", 4));
     }
 
-    @Test
-    void canPolymerize() {
-        Map<String, String> myRules = Map.of("NC", "B", "CB", "H");
-        final String result = polymerization.polymerize(TEST_TEMPLATE, myRules);
-        assertThat(result).isEqualTo("NNBCHB");
-    }
+//    @Test
+//    void canPolymerize() {
+//        Map<String, String> myRules = Map.of("NC", "B", "CB", "H");
+//        final String result = polymerization.polymerize(TEST_TEMPLATE, myRules);
+//        assertThat(result).isEqualTo("NNBCHB");
+//    }
 
     @Test
     void partOneTestInput_oneIteration() {
