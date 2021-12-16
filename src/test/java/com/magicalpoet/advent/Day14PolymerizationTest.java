@@ -24,7 +24,7 @@ class Day14PolymerizationTest {
     }
 
     @BeforeEach
-    void setup() {
+    void setup() throws Exception {
         polymerization = new Day14Polymerization();
     }
 
@@ -54,15 +54,20 @@ class Day14PolymerizationTest {
     }
 
     @Test
-    void partOneAnswer() {
-        final long result = polymerization.process(REAL_TEMPLATE, REAL_RULES, 10);
+    void partOneAnswer() throws Exception {
+        final long result = polymerization.processUsingFiles(REAL_TEMPLATE, REAL_RULES, 10);
         assertThat(result).isEqualTo(2975);
     }
 
     @Test
-    void partTwo_testData() {
-        final long result = polymerization.process(TEST_TEMPLATE, TEST_RULES, 40);
+    void partTwo_testData() throws Exception {
+        final long result = polymerization.processUsingFiles(TEST_TEMPLATE, TEST_RULES, 40);
         assertThat(result).isEqualTo(2188189693529L);
     }
 
+    @Test
+    void partTwo_realData() throws Exception {
+        final long result = polymerization.processUsingFiles(REAL_TEMPLATE, REAL_RULES, 40);
+        assertThat(result).isEqualTo(2);
+    }
 }

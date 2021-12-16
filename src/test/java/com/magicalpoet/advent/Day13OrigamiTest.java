@@ -43,7 +43,7 @@ class Day13OrigamiTest {
 
     @Test
     void realFoldedPaper_allFolds() {
-        final Map<String, Day13Origami.Coordinate> paper = origami.createPaperAndFold(REAL_INPUT, REAL_FOLDS);
+        final Map<String, Coordinate> paper = origami.createPaperAndFold(REAL_INPUT, REAL_FOLDS);
         assertThat(paper.size()).isPositive();
     }
 
