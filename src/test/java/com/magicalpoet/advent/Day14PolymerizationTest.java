@@ -28,18 +28,28 @@ class Day14PolymerizationTest {
         polymerization = new Day14Polymerization();
     }
 
-    @Test
-    void canCountElementsInChain() {
-        Map<String, Integer> result = polymerization.countElements("NBCCNBBBCBHCB");
-        assertThat(result).contains(entry("N", 2), entry("B", 6), entry("C", 4));
-    }
-
 //    @Test
-//    void canPolymerize() {
-//        Map<String, String> myRules = Map.of("NC", "B", "CB", "H");
-//        final String result = polymerization.polymerize(TEST_TEMPLATE, myRules);
-//        assertThat(result).isEqualTo("NNBCHB");
+//    void canCountElementsInChain() {
+//        Map<String, Integer> result = polymerization.countElements("NBCCNBBBCBHCB");
+//        assertThat(result).contains(entry("N", 2), entry("B", 6), entry("C", 4));
 //    }
+
+    @Test
+    void canPolymerize() {
+        Map<String, String> myRules = Map.of("NC", "B", "CB", "H");
+        Map<String, Long> myTemplate = Map.of("NN", 1L, "NC", 1L, "CB", 1L); // NNCB
+
+        final Map<String, Long> polymerMap = polymerization.polymerize(myTemplate, myRules);
+
+        // NNBCHB
+        assertThat(polymerMap).containsOnly(
+                entry("NN", 1L),
+                entry("NB", 1L),
+                entry("BC", 1L),
+                entry("CH", 1L),
+                entry("HB", 1L)
+        );
+    }
 
     @Test
     void partOneTestInput_oneIteration() {
@@ -54,20 +64,21 @@ class Day14PolymerizationTest {
     }
 
     @Test
-    void partOneAnswer() throws Exception {
-        final long result = polymerization.processUsingFiles(REAL_TEMPLATE, REAL_RULES, 10);
+    void partOneAnswer() {
+        final long result = polymerization.process(REAL_TEMPLATE, REAL_RULES, 10);
         assertThat(result).isEqualTo(2975);
     }
 
     @Test
-    void partTwo_testData() throws Exception {
-        final long result = polymerization.processUsingFiles(TEST_TEMPLATE, TEST_RULES, 40);
+    void partTwo_testData() {
+        final long result = polymerization.process(TEST_TEMPLATE, TEST_RULES, 40);
         assertThat(result).isEqualTo(2188189693529L);
     }
 
     @Test
-    void partTwo_realData() throws Exception {
-        final long result = polymerization.processUsingFiles(REAL_TEMPLATE, REAL_RULES, 40);
-        assertThat(result).isEqualTo(2);
+    void partTwo_realData() {
+        final long result = polymerization.process(REAL_TEMPLATE, REAL_RULES, 40);
+        assertThat(result).isGreaterThan(2856661253410L);
+        assertThat(result).isEqualTo(17L);
     }
 }
