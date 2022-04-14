@@ -28,11 +28,6 @@ class Day14PolymerizationTest {
         polymerization = new Day14Polymerization();
     }
 
-//    @Test
-//    void canCountElementsInChain() {
-//        Map<String, Integer> result = polymerization.countElements("NBCCNBBBCBHCB");
-//        assertThat(result).contains(entry("N", 2), entry("B", 6), entry("C", 4));
-//    }
 
     @Test
     void canPolymerize() {
@@ -79,6 +74,6 @@ class Day14PolymerizationTest {
     void partTwo_realData() {
         final long result = polymerization.process(REAL_TEMPLATE, REAL_RULES, 40);
         assertThat(result).isGreaterThan(2856661253410L);
-        assertThat(result).isEqualTo(17L);
+        System.out.println(result);
     }
 }

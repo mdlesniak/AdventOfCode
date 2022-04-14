@@ -24,32 +24,42 @@ public class Day14Polymerization {
     }
 
     public long process(String base, String ruleBook, int iterations) {
-        final String[] rules = ruleBook.split("\n");
-        Map<String, String> rulesMap = Arrays.stream(rules)
-                .map(rule -> rule.split(" -> "))
-                .collect(Collectors.toMap(instructions -> instructions[0], instructions -> instructions[1], (a, b) -> b));
-
-        Map<String, Long> polymerMap = new HashMap<>();
+        Map<String, String> rulesMap = getRules(ruleBook);
         final String[] elements = base.split("");
-        for (int i = 1, elementsLength = elements.length - 1; i <= elementsLength; i++) {
-            polymerMap.put(elements[i - 1] + elements[i], 1L);
-        }
+        Map<String, Long> polymerMap = getPairsCount(elements);
 
         for (int i = 1; i <= iterations; i++) {
             polymerMap = polymerize(polymerMap, rulesMap);
         }
 
         final Map<String, Long> elementsCount = countElements(polymerMap);
+        // correct for elements on ends counted once while all others counted twice
+        elementsCount.put(elements[0], elementsCount.get(elements[0]) + 1);
+        elementsCount.put(elements[elements.length - 1], elementsCount.get(elements[elements.length - 1]) + 1);
+
         final String mostPrevalentElement = Collections.max(elementsCount.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
         final String leastPrevalentElement = Collections.min(elementsCount.entrySet(), Comparator.comparingLong(Map.Entry::getValue)).getKey();
-        long initialCount = (elementsCount.get(mostPrevalentElement) - elementsCount.get(leastPrevalentElement)) / 2;
-        if (mostPrevalentElement.equals(elements[0])) {
-            initialCount++;
+        return (elementsCount.get(mostPrevalentElement) - elementsCount.get(leastPrevalentElement)) / 2;
+    }
+
+    private Map<String, Long> getPairsCount(String[] elements) {
+        Map<String, Long> polymerMap = new HashMap<>();
+        for (int i = 1, elementsLength = elements.length - 1; i <= elementsLength; i++) {
+            String pair = elements[i - 1] + elements[i];
+            if (polymerMap.containsKey(pair)) {
+                polymerMap.put(pair, polymerMap.get(pair) + 1);
+            } else {
+                polymerMap.put(pair, 1L);
+            }
         }
-        if (mostPrevalentElement.equals(elements[elements.length - 1])) {
-            initialCount++;
-        }
-        return initialCount;
+        return polymerMap;
+    }
+
+    private Map<String, String> getRules(String ruleBook) {
+        final String[] rules = ruleBook.split("\n");
+        return Arrays.stream(rules)
+                .map(rule -> rule.split(" -> "))
+                .collect(Collectors.toMap(instructions -> instructions[0], instructions -> instructions[1], (a, b) -> b));
     }
 
     public Map<String, Long> polymerize(Map<String, Long> polymerMap, Map<String, String> rules) {
@@ -70,6 +80,7 @@ public class Day14Polymerization {
                 });
             } else {
                 // add the original pairs without growth
+                // NOTE: not sure this is used based on rules and input
                 if (result.containsKey(currentPair)) {
                     result.put(currentPair, entry.getValue() + result.get(currentPair));
                 } else {
@@ -93,10 +104,7 @@ public class Day14Polymerization {
     }
 
     public long processUsingFiles(String base, String ruleBook, int iterations) throws Exception {
-        final String[] rules = ruleBook.split("\n");
-        Map<String, String> rulesMap = Arrays.stream(rules)
-                .map(rule -> rule.split(" -> "))
-                .collect(Collectors.toMap(instructions -> instructions[0], instructions -> instructions[1], (a, b) -> b));
+        Map<String, String> rulesMap = getRules(ruleBook);
 
         File baseFile = new File(filePath + "polymer34");
         FileWriter fstream = new FileWriter(baseFile, true);
