@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Day02RockPaperScissorsTest {
+    public static final String TEST_INPUT = """
+            A Y
+            B X
+            C Z
+            """;
     private final TestUtils utils = new TestUtils();
     private Day02RockPaperScissors rockPaperScissors;
 
@@ -24,10 +29,7 @@ class Day02RockPaperScissorsTest {
 
     @Test
     void canScoreMatch() {
-        String input = "A Y\n" +
-                "B X\n" +
-                "C Z\n";
-        assertThat(rockPaperScissors.scoreMatch(input)).isEqualTo(15);
+        assertThat(rockPaperScissors.scoreMatch(TEST_INPUT)).isEqualTo(15);
     }
 
     @Test
@@ -38,10 +40,7 @@ class Day02RockPaperScissorsTest {
 
     @Test
     void canScoreMatchSecondWay() {
-        String input = "A Y\n" +
-                "B X\n" +
-                "C Z\n";
-        assertThat(rockPaperScissors.scoreMatchSecondWay(input)).isEqualTo(12);
+        assertThat(rockPaperScissors.scoreMatchSecondWay(TEST_INPUT)).isEqualTo(12);
     }
 
     @Test

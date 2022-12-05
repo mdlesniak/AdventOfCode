@@ -17,19 +17,21 @@ class Day01CalorieCountingTest {
 
     @Test
     void canTotalBundleCalories() {
-        String input = "7000\n" +
-                "8000\n" +
-                "9000";
+        String input = """
+                7000
+                8000
+                9000""";
         assertThat(calorieCounting.totalCaloriesInBundle(input)).isEqualTo(24000);
     }
 
     @Test
     void canFindGreatestTotalInBundles() {
-        String input = "1000\n" +
-                "2000\n" +
-                "3000\n" +
-                "\n" +
-                "4000";
+        String input = """
+                1000
+                2000
+                3000
+
+                4000""";
         assertThat(calorieCounting.findGreatestBundleCalories(input)).isEqualTo(6000);
     }
 

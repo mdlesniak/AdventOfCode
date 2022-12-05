@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Day03RucksackTest {
-    private static final String TEST_INPUT = "vJrwpWtwJgWrhcsFMMfFFhFp\n" +
-            "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\n" +
-            "PmmdzqPrVvPwwTWBwg\n" +
-            "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\n" +
-            "ttgJtRGJQctTZtZT\n" +
-            "CrZsJsPPZsGzwwsLwLmpwMDw";
+    private static final String TEST_INPUT = """
+            vJrwpWtwJgWrhcsFMMfFFhFp
+            jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+            PmmdzqPrVvPwwTWBwg
+            wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+            ttgJtRGJQctTZtZT
+            CrZsJsPPZsGzwwsLwLmpwMDw""";
     private final TestUtils utils = new TestUtils();
     private Day03Rucksack rucksack;
 
