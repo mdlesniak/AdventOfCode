@@ -17,7 +17,7 @@ public class Day06TuningTrouble {
         List<Character> buffer = new ArrayList<>();
         int i = 0;
         while (i < input.length()) {
-            if (i >= desiredCount) {
+            if (buffer.size() == desiredCount) {
                 if (areUnique(buffer)) {
                     return i;
                 }
