@@ -15,8 +15,8 @@ public class Day01CalorieCounting {
     }
 
     public int findGreatestBundleCalories(String input) {
-        List<String> bundles = Arrays.stream(input.split("\n\n")).collect(Collectors.toList());
-        return Collections.max(bundles.stream().map(this::totalCaloriesInBundle).collect(Collectors.toList()));
+        List<String> bundles = Arrays.stream(input.split("\n\n")).toList();
+        return Collections.max(bundles.stream().map(this::totalCaloriesInBundle).toList());
     }
 
     public int findTopThreeBundlesTotal(String input) {
@@ -24,7 +24,7 @@ public class Day01CalorieCounting {
         List<Integer> bundleTotals = bundles.stream()
                 .map(this::totalCaloriesInBundle)
                 .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+                .toList();
         return bundleTotals.get(0) + bundleTotals.get(1) + bundleTotals.get(2);
     }
 }

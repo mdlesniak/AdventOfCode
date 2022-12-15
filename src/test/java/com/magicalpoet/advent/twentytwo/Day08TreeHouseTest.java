@@ -27,9 +27,17 @@ class Day08TreeHouseTest {
     }
 
     @Test
-    void canCountVisible_simpleCase() {
-        assertThat(treeHouse.findVisibleTrees("30373".split(""))).isEqualTo(5);
-        assertThat(treeHouse.findVisibleTrees("303".split(""))).isEqualTo(3);
-        assertThat(treeHouse.findVisibleTrees("302345678373".split(""))).isEqualTo(12);
+    void partOne_testInput() {
+        assertThat(treeHouse.findVisibleTrees(testInput)).isEqualTo(21);
+    }
+
+    @Test
+    void partOne() {
+        assertThat(treeHouse.findVisibleTrees(realInput)).isEqualTo(1782);
+    }
+
+    @Test
+    void partTwo_testInput() {
+        assertThat(treeHouse.findHighestScenicScore(testInput)).isEqualTo(8);
     }
 }
