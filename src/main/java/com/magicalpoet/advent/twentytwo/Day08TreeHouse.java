@@ -46,7 +46,7 @@ public class Day08TreeHouse {
             if (treesNorth.get(i).getHeight() < tree.getHeight()) {
                 count++;
             } else {
-                if (treesNorth.get(i).getHeight() == tree.getHeight()) {
+                if (treesNorth.get(i).getHeight() >= tree.getHeight()) {
                     count++;
                 }
                 break;
@@ -65,7 +65,7 @@ public class Day08TreeHouse {
             if (value.getHeight() < tree.getHeight()) {
                 count++;
             } else {
-                if (value.getHeight() == tree.getHeight()) {
+                if (value.getHeight() >= tree.getHeight()) {
                     count++;
                 }
                 break;
@@ -84,7 +84,7 @@ public class Day08TreeHouse {
             if (value.getHeight() < tree.getHeight()) {
                 count++;
             } else {
-                if (value.getHeight() == tree.getHeight()) {
+                if (value.getHeight() >= tree.getHeight()) {
                     count++;
                 }
                 break;
@@ -103,7 +103,7 @@ public class Day08TreeHouse {
             if (treesWest.get(i).getHeight() < tree.getHeight()) {
                 count++;
             } else {
-                if (treesWest.get(i).getHeight() == tree.getHeight()) {
+                if (treesWest.get(i).getHeight() >= tree.getHeight()) {
                     count++;
                 }
                 break;

@@ -40,4 +40,9 @@ class Day08TreeHouseTest {
     void partTwo_testInput() {
         assertThat(treeHouse.findHighestScenicScore(testInput)).isEqualTo(8);
     }
+
+    @Test
+    void partTwo() {
+        assertThat(treeHouse.findHighestScenicScore(realInput)).isEqualTo(474606);
+    }
 }
