@@ -1,13 +1,6 @@
 package com.magicalpoet.advent.twentyone;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Day9LavaTubes {
@@ -17,6 +10,7 @@ public class Day9LavaTubes {
         List<Integer> lowPoints = findLowPoints(cave);
         return calculateRiskLevel(lowPoints);
     }
+
     public int findBasinsScore(String caveMap) {
         String[] lines = caveMap.split("\n");
         Map<Integer, List<Integer>> cave = getCaveFromStringMap(lines);
