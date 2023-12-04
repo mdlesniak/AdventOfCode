@@ -11,7 +11,6 @@ class Day01TrebuchetTest {
     private String data;
     private Day01Trebuchet trebuchet;
 
-
     @BeforeEach
     void setup() throws Exception {
         data = utils.readFileToString("2023/day01Input.txt");
@@ -19,10 +18,10 @@ class Day01TrebuchetTest {
     }
 
     @Test
-    void getCoordinateDigitsOnly() {
-        assertThat(trebuchet.getCoordinateDigitsOnly("1abc2")).isEqualTo(12);
-        assertThat(trebuchet.getCoordinateDigitsOnly("a1b2c3d4e5f")).isEqualTo(15);
-        assertThat(trebuchet.getCoordinateDigitsOnly("treb7uchet")).isEqualTo(77);
+    void getCoordinate() {
+        assertThat(trebuchet.getCoordinate("1abc2")).isEqualTo(12);
+        assertThat(trebuchet.getCoordinate("a1b2c3d4e5f")).isEqualTo(15);
+        assertThat(trebuchet.getCoordinate("treb7uchet")).isEqualTo(77);
     }
 
     @Test
@@ -43,19 +42,6 @@ class Day01TrebuchetTest {
     }
 
     @Test
-    void getCoordinateDigitsAndWords() {
-        assertThat(trebuchet.getCoordinateDigitsAndWords("1abc2")).isEqualTo(12);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("two1nine")).isEqualTo(29);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("eightwothree")).isEqualTo(83);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("abcone2threexyz")).isEqualTo(13);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("xtwone3four")).isEqualTo(24);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("4nineeightseven2")).isEqualTo(42);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("zoneight234")).isEqualTo(14);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("7pqrstsixteen")).isEqualTo(76);
-        assertThat(trebuchet.getCoordinateDigitsAndWords("7oneight")).isEqualTo(78);
-    }
-
-    @Test
     void getTotalPartTwoTest() {
         String input = """
                 two1nine
@@ -72,6 +58,6 @@ class Day01TrebuchetTest {
     @Test
     void getTotalPartTwo() {
         final long total = trebuchet.getTotalPartTwo(data);
-        assertThat(total).isEqualTo(1);
+        assertThat(total).isEqualTo(54518);
     }
 }

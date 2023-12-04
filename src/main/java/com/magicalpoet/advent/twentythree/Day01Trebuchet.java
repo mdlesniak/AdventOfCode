@@ -19,33 +19,43 @@ public class Day01Trebuchet {
             "eight", "8",
             "nine", "9"
     );
+    private static final Map<String, String> overlappingWordMap = Map.of(
+            "oneight", "18",
+            "twone", "21",
+            "threeight", "38",
+            "fiveight", "58",
+            "sevenine", "79",
+            "eightwo", "82",
+            "eighthree", "83",
+            "nineight", "98"
+    );
 
     public long getTotalPartOne(String data) {
-        final String[] lines = data.split("\n");
-        return Arrays.stream(lines).map(
-                this::getCoordinateDigitsOnly
-        ).mapToLong(Long::longValue).sum();
+        return getTotal(data);
     }
 
     public long getTotalPartTwo(String data) {
+        return getTotal(covertWordsToDigits(data));
+    }
+
+    private static String covertWordsToDigits(String data) {
+        for (var entry : overlappingWordMap.entrySet()) {
+            data = data.replace(entry.getKey(), entry.getValue());
+        }
+        for (var entry : wordMap.entrySet()) {
+            data = data.replace(entry.getKey(), entry.getValue());
+        }
+        return data;
+    }
+
+    private long getTotal(String data) {
         final String[] lines = data.split("\n");
         return Arrays.stream(lines).map(
-                this::getCoordinateDigitsAndWords
+                this::getCoordinate
         ).mapToLong(Long::longValue).sum();
     }
 
-    public long getCoordinateDigitsAndWords(String line) {
-        Matcher matcher = Pattern.compile(
-                "(?=(\\d)|(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine))"
-        ).matcher(line);
-        List<String> result = new ArrayList<>();
-        while (matcher.find()) {
-            result.add(matcher.group());
-        }
-        return getNumberFromFirstAndLastMatchesWithWords(result);
-    }
-
-    public long getCoordinateDigitsOnly(String line) {
+    public long getCoordinate(String line) {
         Matcher matcher = Pattern.compile("\\d").matcher(line);
         List<String> result = new ArrayList<>();
         while (matcher.find()) {
@@ -59,15 +69,4 @@ public class Day01Trebuchet {
         final String lastDigit = matches.get(matches.size() - 1);
         return Long.parseLong(firstDigit + lastDigit);
     }
-
-    private static long getNumberFromFirstAndLastMatchesWithWords(List<String> matches) {
-        final String first = matches.get(0);
-        final String last = matches.get(matches.size() - 1);
-        return Long.parseLong(translate(first) + translate(last));
-    }
-
-    private static String translate(String candidate) {
-        return wordMap.getOrDefault(candidate, candidate);
-    }
-
 }
