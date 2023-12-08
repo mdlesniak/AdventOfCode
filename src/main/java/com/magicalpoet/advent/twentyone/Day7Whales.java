@@ -5,11 +5,9 @@ import com.magicalpoet.advent.Utils;
 import java.util.Arrays;
 
 public class Day7Whales {
-    public static final Utils utils = new Utils();
-
     public int findOptimizedFuelCostEqualized(String testInput) {
         int[] positions = Arrays.stream(testInput.split(",")).mapToInt(Integer::parseInt).toArray();
-        final int median = utils.findMedian(positions);
+        final int median = Utils.findMedian(positions);
         int totalFuelCost = 0;
         for (int position : positions) {
             totalFuelCost = totalFuelCost + Math.abs(position - median);

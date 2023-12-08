@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Day10SyntaxScoring {
-    private static final Utils utils = new Utils();
     private static final Map<String, String> characterPairs = Map.of(
             "(", ")",
             "[", "]",
@@ -38,7 +37,7 @@ public class Day10SyntaxScoring {
                 .mapToLong(line -> scoreAutocompletion(findCompletion(line)))
                 .filter(score -> score > 0)
                 .boxed().collect(Collectors.toList());
-        return utils.findMedian(scores.stream().mapToLong(Long::longValue).toArray());
+        return Utils.findMedian(scores.stream().mapToLong(Long::longValue).toArray());
     }
 
     public int calculateCorruptionScore(String input) {

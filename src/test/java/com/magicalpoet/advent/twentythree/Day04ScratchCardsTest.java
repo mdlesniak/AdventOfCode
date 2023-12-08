@@ -20,8 +20,8 @@ class Day04ScratchCardsTest {
 
     @Test
     void findsWinners() {
-        String card1 = "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53";
-        String card5 = "Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36";
+        String card1 = "Hand 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53";
+        String card5 = "Hand 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36";
         assertThat(scratchCards.findWinners(card1)).containsExactlyInAnyOrder(
                 "48", "83", "17", "86"
         );
@@ -30,8 +30,8 @@ class Day04ScratchCardsTest {
 
     @Test
     void scoresCard() {
-        String card1 = "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53";
-        String card5 = "Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36";
+        String card1 = "Hand 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53";
+        String card5 = "Hand 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36";
         assertThat(scratchCards.scoreCard(card1)).isEqualTo(8);
         assertThat(scratchCards.scoreCard(card5)).isZero();
     }
@@ -39,12 +39,12 @@ class Day04ScratchCardsTest {
     @Test
     void scoresCards() {
         String cards = """
-                Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-                Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
-                Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
-                Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
-                Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
-                Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11""";
+                Hand 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
+                Hand 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
+                Hand 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
+                Hand 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
+                Hand 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
+                Hand 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11""";
         assertThat(scratchCards.scoreCards(cards)).isEqualTo(13);
     }
 
@@ -56,12 +56,12 @@ class Day04ScratchCardsTest {
     @Test
     void copiesCards() {
         String cards = """
-                Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-                Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
-                Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
-                Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
-                Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
-                Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11""";
+                Hand 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
+                Hand 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
+                Hand 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
+                Hand 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
+                Hand 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
+                Hand 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11""";
         assertThat(scratchCards.copyCards(cards)).isEqualTo(30);
     }
 
