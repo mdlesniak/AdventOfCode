@@ -1,23 +1,22 @@
 package com.magicalpoet.advent.twentythree;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Getter
 public class Day13Mirrors {
-    public List<Integer> columns = new ArrayList<>();
-    public List<Integer> rows = new ArrayList<>();
+    private final List<Integer> columnScores = new ArrayList<>();
+    private final List<Integer> rowScores = new ArrayList<>();
 
     public void summarize(String[] boardData) {
         final Stream<Board> boardStream = Arrays.stream(boardData).map(Board::new);
         boardStream.forEach(board -> {
-            final int verticalReflection = board.getVerticalReflection();
-            if (verticalReflection == 0) {
-                rows.add(board.getHorizontalReflection());
-            } else {
-                columns.add(verticalReflection);
-            }
+            columnScores.add(board.getVerticalReflection());
+            rowScores.add(board.getHorizontalReflection());
         });
     }
 
@@ -35,56 +34,73 @@ public class Day13Mirrors {
         }
 
         public int getVerticalReflection() {
-            boolean reflects = true;
-            // assume odd number of characters in a row for now
-            // check first reflection option
-            for (String row : rows) {
-                final String[] characters = row.split("");
-                final String[] newCharacters = Arrays.copyOfRange(characters, 0, characters.length - 1);
-                reflects = doesRowReflect(newCharacters);
+//            for (int i = 1; i < rows[0].length(); i++) {
+//            }
+
+            int axisOption = rows[0].length() / 2;
+            if (rowsReflect(0, rows[0].length() - 1)) {
+                return axisOption;
             }
-            if (reflects) {
-                return rows[0].length() / 2;
+            if (rowsReflect(0, rows[0].length() - 2)) {
+                return axisOption;
             }
-            //check second reflection option
-            for (String row : rows) {
-                String[] characters = row.split("");
-                final String[] newCharacters = Arrays.copyOfRange(characters, 1, characters.length);
-                reflects = doesRowReflect(newCharacters);
-            }
-            if (reflects) {
-                return rows[0].length() / 2 + 1;
+            if (rowsReflect(1, rows[0].length() - 1)) {
+                return axisOption + 1;
             }
             return 0;
         }
 
-        public int getHorizontalReflection() {
-            // assume odd number of rows for now
-            if (columnsReflect(0, rows.length - 2)) {
-                return rows.length / 2;
-            }
-            if (columnsReflect(1, rows.length - 1)) {
-                return rows.length / 2 + 1;
-            }
-            return 0;
-        }
-
-        private boolean columnsReflect(int startRow, int endRow) {
-            for (int top = startRow, bottom = endRow; top <= bottom; top++, bottom--) {
-                for (int i = 0; i < rows[top].length() - 1; i++) {
-                    if (rows[top].charAt(i) != rows[bottom].charAt(i)) {
-                        return false;
-                    }
+        private boolean rowsReflect(int leftIndex, int rightIndex) {
+            for (String row : rows) {
+                if (!rowReflects(row.split(""), leftIndex, rightIndex)) {
+                    return false;
                 }
             }
             return true;
         }
 
-        private static boolean doesRowReflect(String[] characters) {
-            for (int leftIndex = 0, rightIndex = characters.length - 1; leftIndex <= characters.length / 2; leftIndex++, rightIndex--) {
+        private static boolean rowReflects(String[] characters, int leftIndex, int rightIndex) {
+            while (leftIndex <= characters.length / 2) {
                 if (!characters[leftIndex].equals(characters[rightIndex])) {
                     return false;
                 }
+                leftIndex++;
+                rightIndex--;
+            }
+            return true;
+        }
+
+        public int getHorizontalReflection() {
+            for (int i = 1; i < rows.length; i++) {
+                for (int above = i, below = i; above > 0; above--, below++) {
+                    if (!rows[above - 1].equals(rows[below])) {
+                        break;
+                    }
+                }
+                return i;
+            }
+
+            //            if (columnsReflect(0, rows.length - 1)) {
+//                return rows.length / 2;
+//            }
+//            if (columnsReflect(0, rows.length - 2)) {
+//                return rows.length / 2;
+//            }
+//            if (columnsReflect(1, rows.length - 1)) {
+//                return rows.length / 2 + 1;
+//            }
+            return 0;
+        }
+
+        private boolean columnsReflect(int topRow, int bottomRow) {
+            while (topRow <= bottomRow) {
+                for (int i = 0; i < rows[topRow].length() - 1; i++) {
+                    if (rows[topRow].charAt(i) != rows[bottomRow].charAt(i)) {
+                        return false;
+                    }
+                }
+                topRow++;
+                bottomRow--;
             }
             return true;
         }
